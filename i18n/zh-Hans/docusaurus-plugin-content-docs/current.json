@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.someSidebar.category.Specification": {
+    "message": "Specification",
+    "description": "The label for category Specification in sidebar someSidebar"
+  },
+  "sidebar.someSidebar.category.Custom UI": {
+    "message": "Custom UI",
+    "description": "The label for category Custom UI in sidebar someSidebar"
+  },
+  "sidebar.someSidebar.category.Appendix": {
+    "message": "Appendix",
+    "description": "The label for category Appendix in sidebar someSidebar"
+  },
+  "sidebar.someSidebar.category.VIA Version 3": {
+    "message": "VIA Version 3",
+    "description": "The label for category VIA Version 3 in sidebar someSidebar"
+  }
+}

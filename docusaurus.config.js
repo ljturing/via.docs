@@ -3,8 +3,24 @@ module.exports = {
   tagline: "Your keyboard's best friend",
   url: "https://caniusevia.com",
   baseUrl: "/",
-  organizationName: "the-via", // Usually your GitHub org/user name.
-  projectName: "keyboards", // Usually your repo name.
+  organizationName: "the-via",
+  projectName: "keyboards",
+    i18n: {
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans', 'en'],
+    localeConfigs: {
+      'zh-Hans': {
+        label: '简体中文',
+        direction: 'ltr',
+        htmlLang: 'zh-Hans',
+      },
+      'en': {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en',
+      }
+    }
+  },
   themeConfig: {
     twitterImage: "img/icon.png",
     ogImage: "img/icon.png",
@@ -28,6 +44,10 @@ module.exports = {
         },
         { to: "docs/specification", label: "Docs", position: "left" },
         { to: "docs/download_firmware", label: "Firmware", position: "left" },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
         {
           href: "https://discord.gg/NStTR5YaPB",
           label: "Discord",
@@ -60,3 +80,4 @@ module.exports = {
     ],
   ],
 };
+

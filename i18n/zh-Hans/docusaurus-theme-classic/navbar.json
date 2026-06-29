@@ -1,0 +1,39 @@
+{
+  "title": {
+    "message": "VIA",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "VIA",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Try Now!": {
+    "message": "立即体验！",
+    "description": "Navbar item with label Try Now!"
+  },
+  "item.label.What's New": {
+    "message": "更新说明",
+    "description": "Navbar item with label What's New"
+  },
+  "item.label.Supported Keyboards": {
+    "message": "已支持的键盘",
+    "description": "Navbar item with label Supported Keyboards"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Firmware": {
+    "message": "固件",
+    "description": "Navbar item with label Firmware"
+  },
+  "item.label.Discord": {
+    "message": "Discord",
+    "description": "Navbar item with label Discord"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}
+
