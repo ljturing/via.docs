@@ -1,23 +1,23 @@
 ---
 id: configuring_qmk
-title: Configuring QMK
-sidebar_label: Configuring QMK
+title: 配置 QMK
+sidebar_label: 配置 QMK
 ---
 
-## Overview
+## 总览
 
 VIA works by communicating with the firmware that is running on the device and sending it commands across USB. Enabling the VIA feature in QMK enables both the ability to communicate with the VIA Configurator and the ability to store keymaps and other settings.
 
 - Create a `via` keymap directory and files within that are separate from the default keymap
 - Make changes to the keyboard's `info.json` and `rules.mk` to make the firmware compatible
 
-## Create a `via` Keymap Directory and Files in QMK Source
+## 在 QMK 资源中创建 `via` 键映射目录和文件
 
 VIA compatible firmware must be a separate QMK build target from the default keymap. Create a `via` keymap directory, e.g. `keyboards/<keyboardname>/keymaps/via`
 
 For acceptance into the upstream QMK repository this folder must be named `via`, but that is not an absolute requirement for your copy of the repository. It is possible to add VIA support to any keymap with the correct configuration.
 
-## Create a `rules.mk` in `keyboards/<keyboard_name>/keymaps/via`
+## 在 `keyboards/<keyboard_name>/keymaps/via` 中创建 `rules.mk`
 
 In most cases this file will only require:
 
@@ -31,7 +31,7 @@ This will enable dynamic keymaps, raw HID message handling and bootmagic lite.
 
 Do not put `VIA_ENABLE = yes` in the keyboard directory’s `rules.mk`. This configuration should only be added to VIA-specific keymaps, not enabled by default at the keyboard level.
 
-## Create a `keymap.c` or `keymap.json` in `keyboards/<keyboardname>/keymaps/via`
+## 在 `keyboards/<keyboardname>/keymaps/via` 中创建 `keymap.c` 或 `keymap.json`
 
 The keymap in the `via` keymap folder should use a `LAYOUT_*()` macro that allows all the electrical positions to be mapped, even if that layout isn't physically possible.
 
@@ -43,9 +43,9 @@ There typically is no need to use a `config.h` in the `via` keymap directory.
 >
 > A: Yes, if it can fit in the EEPROM space. This is advanced usage and requires understanding how dynamic keymaps works and overriding the default settings.
 
-## Changes to keyboard directory’s `info.json`
+## 更改键盘目录的 `info.json`
 
-### Change `usb.vid` and `usb.pid`
+### 更改 `usb.vid` 和 `usb.pid`
 
 There is a high probability that these values are the defaults from the QMK new keyboard script or were copied from another keyboard implementation and left unchanged, e.g:
 
@@ -80,7 +80,7 @@ Choose a `pid` that is unique for all keyboards using the same `vid`. They can s
 >
 > A: Yes, it would be slightly better, but this method continues QMK’s unofficial use of arbitrary vendor/product IDs and doesn’t introduce another unique ID.
 
-### Change `keyboard_name`
+### 更改 `keyboard_name`
 
 The value of `keyboard_name` in `info.json` is what will appear in the list of devices (for example, in the ‘Bluetooth & other devices’ page of Windows, and in a notification when the device is first connected and being ‘installed’).
 
@@ -90,7 +90,7 @@ VIA Configurator will switch to using the value of `keyboard_name` when displayi
 
 Note that spaces are allowed.
 
-### Set `bootmagic.matrix` (optional)
+### 设置 `bootmagic.matrix` （可选）
 
 If the Esc key (or top left key) of the keyboard is not at matrix position (0,0), then explicitly set its matrix position in `info.json` at the keyboard level.
 
@@ -102,7 +102,7 @@ For consistency, it should be set to the top left key of the keyboard, even if t
 
 You may want to consider enabling bootmagic lite at the keyboard level (i.e. adding `"bootmagic": true` to the `features` list in `info.json`). This will automatically be enabled for VIA-enabled builds, but it is still useful for VIA-disabled builds so that the device can be switched into bootloader mode without requiring a `QK_BOOT` keycode or pressing the reset button on the PCB.
 
-## VIA settings in `config.h`
+## `config.h` 中的 VIA 设置
 
 The VIA implementation in QMK will automatically define its own settings for EEPROM usage, the number of layers used for dynamic keymaps, etc. Unless the keyboard requires loading/saving its own state to EEPROM outside of QMK’s core EEPROM usage, there is no need to override the default settings.
 
@@ -116,7 +116,7 @@ However, if you are doing something advanced and require changing VIA’s settin
 
 `VIA_EEPROM_CUSTOM_CONFIG_SIZE` controls the size of EEPROM memory to store keyboard specific configuration, such as lighting settings, rotary encoder settings, display settings. It defaults to 0 bytes. Keyboard level code can use `VIA_EEPROM_CUSTOM_CONFIG_ADDR` as the start address of EEPROM reserved for its use.
 
-## EEPROM Memory Usage
+## EEPROM 内存使用
 
 When VIA is enabled, EEPROM memory is assigned as:
 
@@ -128,7 +128,7 @@ When VIA is enabled, EEPROM memory is assigned as:
 
 Unless a keyboard is implementing its own storage of state, there is no need to set anything. By enabling VIA, the defaults are set to use EEPROM memory as above. By default, dynamic keymaps have 4 layers. If your keymap does not specify keycodes for all 4 layers, the rest will be automatically filled in with `KC_TRNS`; there is no need to hardcode "filler" `KC_TRNS` layers.
 
-## Running out of space?
+## 空间不够？
 
 Keyboards with many features and/or large keymaps may fail to compile with VIA support if there is not enough flash memory or EEPROM available.
 
@@ -141,3 +141,4 @@ Reducing the number of dynamic keymap layers available will lower EEPROM usage a
 To reduce firmware size, consider turning on link time optimization by adding `LTO_ENABLE = yes` to the keymap directory's `rules.mk` file. This may have unexpected side effects on keyboards using ARM processors, so test thoroughly with it enabled and disabled.
 
 If link time optimization doesn't get the job done or exposes buggy behavior, you may have to disable QMK features. More advice on this can be found [in QMK's documentation](https://docs.qmk.fm/#/squeezing_avr).
+

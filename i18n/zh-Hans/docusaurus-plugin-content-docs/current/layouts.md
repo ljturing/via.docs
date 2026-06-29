@@ -1,10 +1,10 @@
 ---
 id: layouts
-title: Layouts
-sidebar_label: Layouts
+title: 布局
+sidebar_label: 布局
 ---
 
-## Overview
+## 总览
 
 VIA requires a definition of both the physical arrangement of keys and the mapping of those keys to the switch matrix. It optionally requires definition of layout options - alternative physical arrangements of keys, such as different bottom rows, split right shift, etc.
 
@@ -14,7 +14,7 @@ The `labels` property is used to name the layout options.
 
 Keyboard Layout Editor will not load the `<keyboard_name>.json` that VIA uses, only the KLE JSON within the `keymap` property. The user can copy the value of the `keymap` property into the "Raw data" tab of Keyboard Layout Editor, i.e. everything inside the outer `[` and `]`. Unfortunately, copying and pasting the other way does not work. (KLE's "Raw data" tab contains JSON with missing " around property names.) In KLE, save as a JSON file and then copy the contents of the JSON file into the `keymap` property of the `<keyboard_name>.json`
 
-## KLE JSON Rules
+## KLE JSON 规则
 
 The KLE JSON should follow these rules:
 
@@ -26,7 +26,7 @@ The KLE JSON should follow these rules:
 
 Note: The key colors used in the KLE will be used by VIA to map alphas/modifiers/accents to a color theme, thus all keys which are the "modifier" color in a standard keycap set should be set to `#aaaaaa`. Some color themes may have the same color for alphas and modifiers.
 
-## Switch Matrix Co-ordinates
+## 按键矩阵坐标
 
 The mapping from physical layout to switch matrix layout is defined by the top-left legend of the key, using `row,col` format.
 
@@ -49,7 +49,7 @@ QMK Layout Macro Example:
    
 ```
 
-## Rotary Encoders
+## 旋转编码器
 
 You can setup your VIA layout to display rotary encorders right in the UI. To do this you need to a few things setup properly in QMK.
 
@@ -61,25 +61,25 @@ Required setup in QMK:
   * The encoder map should be defined for the same number of layers as configured for VIA (default 4)
   * Add the encoder to the VIA keyboard definition
 
-### Encoders without push switch (Just twist, no push)
+### 不带按键的编码器（只能转不能按）
 ![Just Encoder](/img/just-encoder.png)
 
   Add a "key" to the KLE JSON with e0, e1, etc. as the center label. The number will match the encoder ID used in the encoder map.
 
-### Rotary encoder with a push switch
+### 带按键的旋转编码器
 ![Encoder with Switch](/img/encoder-with-push.png)
 
   Define the switch matrix co-ordinates like other switches and add e0, e1, etc. to the center label of the switch
 
-### Optional Rotary Encoder (combined switch/rotary encoder footprint)
+### 可选旋转编码器（按键和旋转编码器引脚的组合）
 ![Optional Encoder](/img/optional-encoder.png)
 
   Use VIA Layout Options like other switches. VIA can render either a knob or switch or empty space.
 
-### Here's what it looks like
+### 看起来就是这样
 ![Result](/img/result.png)
 
-## Layout Options
+## 布局选项
 
 If a keyboard supports multiple physical layout of keys, then the KLE JSON definition will contain the "default" layout as well as all the layout options.
 
@@ -101,13 +101,13 @@ Layout options can use "decal" keys to represent optional blockers, i.e. HHKB or
 
 VIA will present the layout options to the user, and store the state of the choices in the device, so it persists between configuration.
 
-Example:
+示例：
 
 ![Split Backspace](/img/split_backspace.png)
 
 This example defines the layout option "Split Backspace".
 
-It shows:
+说明：
 
   * the 2U backspace legend is `0,0` meaning it belongs to layout option #0, layout option choice #0
   * the 2U backspace is the default (because it is `-,0`)
@@ -126,7 +126,7 @@ This shows split backspace as the first of many layout options, and some other p
   * layout options with more than two choices
   * layout options incorporating "blockers" (keys with `Decal` checked)
 
-## Layout Option Labels
+## 布局选项标签
 
 Layout options are assigned labels from the `labels` property.
 
@@ -157,3 +157,4 @@ The order of the labels is important as the implicit index is used to map to the
 If an item in the `labels` array is a `string`, it is presented as a toggle button, the off state maps to layout option choice #0 (the default), the on state maps to layout option choice #1.
 
 If an item in the `labels` array is a `string[]`, it maps to a select control with the first item in the array being used as the label for the control and the following items being used as labels of layout option choices #0, #1, #2, etc. In the example above, the `Bottom Row` is the label, `ANSI` maps to layout option choice #0, `7U` maps to layout option choice #1, etc.
+

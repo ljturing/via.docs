@@ -1,10 +1,10 @@
 ---
 id: v3_changes
-title: VIA Version 3 Changes
-sidebar_label: VIA Version 3 Changes
+title: VIA V3 变更
+sidebar_label: VIA V3 变更
 ---
 
-## Introduction
+## 介绍
 
 In VIA Version 1,the UI and the keyboard definitions were entirely self-contained (i.e. hard-coded). Adding new keyboards requires changing code and rebuilding/releasing the app.
 
@@ -14,11 +14,11 @@ VIA Version 2 keyboard definitions include layout options and control of lightin
 
 VIA Version 3 is a refactoring of how the UI works in VIA, to allow fully customized UI within VIA to control firmware parameters like lighting, but also **any custom feature** implemented in the firmware, either in QMK Core or at the keyboard level. It works by defining what UI elements VIA should show, and binding those UI elements to IDs, which VIA will use in communication with the firmware.
 
-## Keyboard Definition Changes for VIA V2 to V3
+## 从 VIA V2 到 V3 的键盘定义变化
 
 This describes the changes made between V2 and V3.
 
-### Lighting
+### 灯光
 
 The `lighting` element is deprecated and replaced by specifying **one or more** of the following in the `menus` element:
 
@@ -45,7 +45,7 @@ Example:
 
 The above additions are all that is required to enable the UI for controlling the stock lighting features of QMK.
 
-### Menus
+### 菜单
 
 The `menus` element is new in V3, and used to define the UI (aka. menus) in VIA. It replaces how lighting control is defined, and allows for defining other run-time parameters of a keyboard firmware.
 
@@ -82,7 +82,7 @@ The built-in UI definitions are located in the repository [here](https://github.
 
 The complete documentation for custom UI is [here](custom_ui).
 
-### Firmware Version
+### 固件版本
 
 ```json
 "firmwareVersion": 0
@@ -94,7 +94,7 @@ Firmware authors can increment the `VIA_FIRMWARE_VERSION` symbol in the QMK sour
 
 Note that `firmwareVersion` is different to the VIA protocol version (`VIA_PROTOCOL_VERSION` in QMK), which ensures that VIA and the firmware are both using the same definition of command IDs and command paramters. For example. the change from V2 to V3 definitions is an example of how the VIA protocol version is used. 
 
-## QMK Changes for VIA V2 to V3
+## 从 VIA V2 到 V3 的 QMK 变化
 
 VIA V2 definitions are used for QMK firmware built with VIA Protocol 10 or less.
 VIA V3 definitions are used for QMK firmware built with VIA Protocol 11 or greater.
@@ -105,7 +105,7 @@ All V2 definitions were converted to equivalent V3 definitions in the repository
 
 The following describes the changes in QMK between VIA Protocol 10 and 11.
 
-### Commands
+### 命令
 
 The commands for setting/getting lighting values have been replaced with commands for setting/getting "custom" values. Custom values can be for lighting or any other feature.
 
@@ -164,7 +164,7 @@ In the VIA keyboard definition, when defining UI controls in the `menu` element,
 
 In this example, `3` is the `channel_id` (which matches the channel in QMK) and `1` matches enum value `id_qmk_rgb_matrix_brightness` in enum `via_qmk_rgb_matrix_value`. The string `"id_qmk_rgb_matrix_brightness"` is the `value_key`, used by VIA as a unique key.
 
-### Keyboard Values
+### 键盘值
 
 Keyboard values are used for getting/setting core VIA features like layout options. In VIA Protocol 11, two new values were added:
 
@@ -179,3 +179,4 @@ enum via_keyboard_value_id {
 `id_firmware_version` is used to get the firmware version, see #Firmware Versioning. It returns `VIA_FIRMWARE_VERSION` to VIA, for use in ensuring a match between the VIA keyboard definition and the firmware's handling of custom UI (aka. the `menus` element).
 
 `id_device_indication` is set by VIA to allow the device to indicate that it is being configured. This is a refactoring of how VIA V2 would cause a keyboard with RGB backlighting to flash on/off when it became the keyboard being configured, which was done by sending `id_lighting_set_value` commands. This feature was refactored to be device agnostic. The default handler `via_set_device_indication()` will toggle any enabled QMK lighting feature and/or trigger audio playback. It can be overridden and customized at the keyboard level.
+

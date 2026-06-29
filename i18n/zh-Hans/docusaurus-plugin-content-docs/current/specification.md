@@ -1,10 +1,10 @@
 ---
 id: specification
-title: Specification
-sidebar_label: Specification
+title: 规范
+sidebar_label: 规范
 ---
 
-# Specification
+# 规范
 
 In order for VIA to configure a keyboard, it requires a definition of the keyboard - the physical layout of keys, any layout options, and other configurable elements like rotary encoders (knobs), lighting, etc.
 
@@ -14,13 +14,13 @@ People adding VIA support to their keyboards can add their keyboard definition t
 
 Here is a great video by Joe Scotto giving an overview of the process:
 
-<iframe width="640" height="480" src="https://www.youtube.com/embed/7d5yzBOup9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![YouTube video player](/video.png)](https://www.youtube.com/embed/7d5yzBOup9U)
 
-## Keyboard Definition
+## 键盘定义
 
 Keyboard definitions are in JSON format. Valid properties are described below.
 
-## Name
+## 名字
 
 ```json
   "name": "Macropad",
@@ -28,7 +28,7 @@ Keyboard definitions are in JSON format. Valid properties are described below.
 
 The `name` property denotes the name of the keyboard being defined.
 
-## Vendor & Product ID
+## 厂商和产品 ID
 
 ```json
   "vendorId": "0x5241",
@@ -37,7 +37,7 @@ The `name` property denotes the name of the keyboard being defined.
 
 The `productId` property corresponds to the usb product id. This combined with the `vendorId` is what is used by VIA to identify the keyboard when it is plugged in.
 
-## Matrix
+## 矩阵
 
 ```json
   "matrix": {"rows": 1, "cols": 6},
@@ -45,7 +45,7 @@ The `productId` property corresponds to the usb product id. This combined with t
 
 The `matrix` property defines how many rows and columns the PCB's switch matrix uses. This must match the `MATRIX_ROWS` and `MATRIX_COLS` symbols in the QMK firmware.
 
-## Layouts
+## 布局
 
 ```json
   "layouts": {
@@ -84,7 +84,7 @@ If an item in the `labels` array is a `string[]`, it maps to a select control wi
 
 Documentation explaining how layout options work is [here](layouts).
 
-## Menus
+## 菜单
 
 The `menus` element is used to define more menus in VIA. It can contain **one or more** of the following built-in UI definitions:
 
@@ -133,7 +133,7 @@ If the firmware is using the stock implementation of a feature, i.e. it is enabl
 
 The built-in UI definitions are defined the same way as custom UI definitions (i.e. JSON format) and for reference are located here: https://github.com/the-via/keyboards/tree/master/common-menus. They can be used as examples to create custom UI definitions.
 
-## Keycodes
+## 键码
 
 If the definition is for a keyboard that uses QMK lighting, you can optionally enable the lighting keycodes.
 
@@ -141,3 +141,4 @@ If the definition is for a keyboard that uses QMK lighting, you can optionally e
   "keycodes": ["qmk_lighting"],
   "menus": ["qmk_rgblight"],
 ```
+
