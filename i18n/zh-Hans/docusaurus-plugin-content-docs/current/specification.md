@@ -6,19 +6,19 @@ sidebar_label: 规范
 
 # 规范
 
-In order for VIA to configure a keyboard, it requires a definition of the keyboard - the physical layout of keys, any layout options, and other configurable elements like rotary encoders (knobs), lighting, etc.
+为了让 VIA 配置键盘，它需要键盘的定义——按键的物理布局、任何布局选项以及其他可配置的元素，如旋转编码器（旋钮）、灯光等。
 
-These things are defined in a "keyboard definition" - a file in JSON format that is stored in the VIA Github repository and hosted by the VIA website for VIA to download and use when that keyboard is connected.
+这些东西在“键盘定义”中定义——一个 JSON 格式的文件，存储在 VIA Github 仓库中，并由 VIA 网站托管，以便在连接键盘时由 VIA 下载和使用。
 
-People adding VIA support to their keyboards can add their keyboard definition to the Github repository by creating a pull request here: https://github.com/the-via/keyboards
+将 VIA 支持添加到键盘的人，可以通过在[这里](https://github.com/the-via/keyboards)创建一个拉取请求，将键盘定义添加到 Github 仓库中。
 
-Here is a great video by Joe Scotto giving an overview of the process:
+这是 Joe Scotto 的一段精彩视频，概述了这个过程：
 
 [![YouTube video player](/video.png)](https://www.youtube.com/embed/7d5yzBOup9U)
 
 ## 键盘定义
 
-Keyboard definitions are in JSON format. Valid properties are described below.
+键盘定义采用 JSON 格式，有效属性描述如下。
 
 ## 名字
 
@@ -26,7 +26,7 @@ Keyboard definitions are in JSON format. Valid properties are described below.
   "name": "Macropad",
 ```
 
-The `name` property denotes the name of the keyboard being defined.
+`name` 属性表示正在定义的键盘的名称。
 
 ## 厂商和产品 ID
 
@@ -35,7 +35,7 @@ The `name` property denotes the name of the keyboard being defined.
   "productId": "0x1234",
 ```
 
-The `productId` property corresponds to the usb product id. This combined with the `vendorId` is what is used by VIA to identify the keyboard when it is plugged in.
+`productId` 属性对应于 USB 产品 ID，结合 `vendorId`，VIA 在插入键盘时用来识别键盘。
 
 ## 矩阵
 
@@ -43,7 +43,7 @@ The `productId` property corresponds to the usb product id. This combined with t
   "matrix": {"rows": 1, "cols": 6},
 ```
 
-The `matrix` property defines how many rows and columns the PCB's switch matrix uses. This must match the `MATRIX_ROWS` and `MATRIX_COLS` symbols in the QMK firmware.
+`matrix` 属性定义了 PCB 的按键矩阵使用的行数和列数。这必须与 QMK 固件中的 `MATRIX_ROWS` 和 `MATRIX_COLS` 符号相匹配。
 
 ## 布局
 
@@ -58,7 +58,7 @@ The `matrix` property defines how many rows and columns the PCB's switch matrix 
   }
 ```
 
-The `keymap` property corresponds to the KLE json exported by [KLE](http://keyboard-layout-editor.com) and has the switch row, col defined in the top-left legends and optionally the group number, option number defined in the bottom-right legends. The KLE can support up to 3 different colored keys which is used to identify the alpha, modifier and accent keys which VIA will automatically apply a theme to.
+`keymap` 属性对应于 [KLE](http://keyboard-layout-editor.com) 导出的 KLE JSON，具有左上角图例中定义的按键行、列和右下角图例中定义的可选择的组号、选项编号。KLE 最多支持3个不同颜色的键，用于识别 VIA 将自动应用主题的字母、修饰键和重音键。
 
 ```json
   "layouts": {
@@ -74,19 +74,19 @@ The `keymap` property corresponds to the KLE json exported by [KLE](http://keybo
   }
 ```
 
-The `labels` property is an optional array of `string` or `string[]` and defines the labels for the layout controls.
+`labels` 属性是 `string` 或 `string[]` 的可选数组，定义了布局控件的标签。
 
-The order of the labels is important as the implicit index is used to map to the group number e.g. `Split Backspace` corresponds to layout option #0, `ISO` corresponds to layout option #1, etc.
+标签的顺序很重要，因为隐式序号用于映射到组号，例如 `Split Backspace` 对应布局选项 #0，`ISO` 对应布局选项 #1，等等。
 
-If an item in the `labels` array is a `string`, it is presented as a toggle button, the off state maps to layout option choice #0 (the default), the on state maps to layout option choice #1.
+如果 `labels` 数组中的项目是 `string`，则将其显示为切换按钮，关闭状态映射到布局选项 #0（默认值），打开状态映射到布局选项 #1。
 
-If an item in the `labels` array is a `string[]`, it maps to a select control with the first item in the array being used as the label for the control and the following items being used as labels of layout option choices #0, #1, #2, etc. In the example above, the `Bottom Row` is the label, `ANSI` maps to layout option choice #0, `7U` maps to layout option choice #1, etc.
+如果 `labels` 数组中的一个项目是 `string[]`，它映射到一个选择控件，数组中的第一个项目用作控件的标签，以下项目用作布局选项选择 #0，#1，#2 等的标签。在上述示例中，`Bottom Row` 是标签，`ANSI` 映射到布局选项选择 #0，`7U` 映射到布局选项选择 #1 等。
 
-Documentation explaining how layout options work is [here](layouts).
+解释布局选项如何工作的文档在[这里](./layouts)。
 
 ## 菜单
 
-The `menus` element is used to define more menus in VIA. It can contain **one or more** of the following built-in UI definitions:
+`menus` 用于在 VIA 中定义更多菜单，它可以包含以下**一个或多个**内置 UI 定义：
 
 - `"qmk_backlight"`
 - `"qmk_rgblight"`
@@ -94,15 +94,15 @@ The `menus` element is used to define more menus in VIA. It can contain **one or
 - `"qmk_rgb_matrix"`
 - `"qmk_audio"`
 
-**and/or** a definition of custom UI, i.e. explicitly defining all the UI controls required.
+**和/或**自定义 UI 的定义，即明确定义所需的所有 UI 控件。
 
-For example, a definition enabling the built-in UI for QMK RGB Matrix could be done like so:
+例如，启用 QMK RGB 矩阵内置 UI 的定义可以这样做：
 
 ```json
 "menus": ["qmk_rgb_matrix" ]
 ```
 
-**or alternatively** defined explicitly using custom UI definitions, like so:
+**或者**使用自定义 UI 定义明确定义，如下所示：
 
 ```json
 ...
@@ -127,15 +127,15 @@ For example, a definition enabling the built-in UI for QMK RGB Matrix could be d
 ]
 ```
 
-The complete documentation for custom UI is [here](custom_ui).
+自定义 UI 的完整文档在[这里](./custom_ui)。
 
-If the firmware is using the stock implementation of a feature, i.e. it is enabled in the `info.json` or the `rules.mk` and not customized, then using one of the built-in UI definitions is all that is needed.
+如果固件使用的功能的库存实现，即在 `info.json` 或 `rules.mk` 中启用，并且没有自定义，那么只需要使用内置 UI 定义之一。
 
-The built-in UI definitions are defined the same way as custom UI definitions (i.e. JSON format) and for reference are located here: https://github.com/the-via/keyboards/tree/master/common-menus. They can be used as examples to create custom UI definitions.
+内置 UI 定义的定义方式与自定义 UI 定义相同（即 JSON 格式）和参考位于[这里](https://github.com/the-via/keyboards/tree/master/common-menus)。
 
 ## 键码
 
-If the definition is for a keyboard that uses QMK lighting, you can optionally enable the lighting keycodes.
+如果定义是针对使用 QMK 灯光的键盘，你可以选择启用灯光键码。
 
 ```json
   "keycodes": ["qmk_lighting"],
