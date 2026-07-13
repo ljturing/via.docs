@@ -3,9 +3,9 @@ module.exports = {
   tagline: "Your keyboard's best friend",
   url: "https://caniusevia.com",
   baseUrl: "/",
-  organizationName: "the-via",
-  projectName: "keyboards",
-    i18n: {
+  organizationName: "ljturing",
+  projectName: "via.docs",
+  i18n: {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans', 'en'],
     localeConfigs: {
@@ -24,6 +24,11 @@ module.exports = {
   themeConfig: {
     twitterImage: "img/icon.png",
     ogImage: "img/icon.png",
+    algolia: {
+      appId: 'ZRC2YR18ZJ',
+      apiKey: '30e9cae42026fb349e2ce36ac028b668',
+      indexName: 'viadocs'
+    },
     navbar: {
       title: "VIA",
       logo: {
