@@ -27,7 +27,8 @@ module.exports = {
     algolia: {
       appId: 'ZRC2YR18ZJ',
       apiKey: '30e9cae42026fb349e2ce36ac028b668',
-      indexName: 'viadocs'
+      indexName: 'viadocs',
+      contextualSearch: true
     },
     navbar: {
       title: "VIA",
