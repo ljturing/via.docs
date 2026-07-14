@@ -1,5 +1,7 @@
 # [VIA 网站](https://www.caniusevia.com) - 你键盘的最佳伙伴
 
+[English](readme_en.md)
+
 ![android-chrome-192x192](/static/android-chrome-192x192.png)
 
 VIA 是一个强大、开源的网页交互，专为配置你的 [QMK](https://qmk.fm) 支持的机械键盘。
