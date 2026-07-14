@@ -77,7 +77,7 @@ $ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 2. 生成翻译文件：
 
 ```bash
-yarn docusaurus write-translations --locale <your-locale>
+yarn write-translations --locale <your-locale>
 ```
 
 3. 编辑生成的翻译文件，位于 `i18n/your-locale/` 目录下。
